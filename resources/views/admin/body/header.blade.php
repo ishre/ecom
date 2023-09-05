@@ -200,7 +200,7 @@
                                     <div class="text-center">
                                         <p class="tx-16 fw-bolder">Amiah Burton</p>
                                         <p class="tx-12 text-muted">amiahburton@gmail.com</p>
-                                    </div>
+                                    </div> 
                                 </div>
                                 <ul class="list-unstyled p-1">
                                     <li class="dropdown-item py-2">
