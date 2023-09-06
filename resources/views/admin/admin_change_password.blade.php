@@ -1,3 +1,4 @@
+
 @extends('admin.admin_dashboard')
 @section('admin')
 
@@ -57,32 +58,27 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h6 class="card-title">Update Profile</h6>
+                    <h6 class="card-title">Admin Password Change</h6>
 
-                    <form class="forms-sample" method="POST" action="{{ route('admin.profile.store') }}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="{{ route('admin.update.password') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input name="name" type="text" class="form-control" id="name" autocomplete="off" value="{{$profileData->name}}">
+                            <label for="name" class="form-label">Old Password</label>
+                            <input name="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" id="old_password" autocomplete="off">
+                            @error ('old_password')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input name="username" type="text" class="form-control" id="username" autocomplete="off" value="{{$profileData->username}}">
+                            <label for="new_password" class="form-label">New Password</label>
+                            <input name="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" id="new_password" autocomplete="off" >
+                            @error('new_password')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input name="email" type="email" class="form-control" id="email" value="{{$profileData->email}}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input name="address" type="textarea" class="form-control" id="address" value="{{$profileData->address}}">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="photo">File upload</label>
-                            <input name="photo" class="form-control" type="file" id="image">
-                        </div>
-                        <div class="mt-3 mb-3">
-                            <img class="wd-80 rounded-circle" id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg') }} " alt="profile">
+                            <label for="old_password" class="form-label">Confirm New Password</label>
+                            <input name="new_password_confirmation" type="password" class="form-control" id="new_password_confirmation" autocomplete="off" >
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-secondary">Cancel</button>
@@ -97,17 +93,5 @@
 
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#image').change(function(e){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#showImage').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        })
-    })
-</script>
 
 @endsection
